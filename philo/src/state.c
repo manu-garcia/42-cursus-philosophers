@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   state.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/20 16:22:30 by manu              #+#    #+#             */
+/*   Updated: 2022/08/20 16:48:04 by manu             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <string.h>
+
+#include "state.h"
+#include "error.h"
+#include "ft_atoi.h"
+
+int	init_state(t_state *state, int argc, char *argv[])
+{
+	memset(state, 0, sizeof(t_state));
+	if (argc < 5 || argc > 6)
+		return (exit_with_error("Error. Invalid arguments\n", state));
+	state->n_philosophers = ft_atoi(argv[1]);
+	state->time_to_die = ft_atoi(argv[2]);
+	state->time_to_eat = ft_atoi(argv[3]);
+	state->time_to_sleep = ft_atoi(argv[4]);
+	state->ntimes_must_eat = ft_atoi(argv[5]);
+	return (1);
+}
+
+int	free_state(t_state *state)
+{
+	memset(state, 0, sizeof(t_state));
+	return (1);
+}
