@@ -6,11 +6,12 @@ INCLUDES_DIR		= 	includes
 
 SOURCES				= 	$(SRC_DIR)/error.c \
 						$(SRC_DIR)/ft_atoi.c \
+						$(SRC_DIR)/philo_factory.c \
 						$(SRC_DIR)/state.c
 MAIN_SOURCES		= 	$(SRC_DIR)/main.c $(SOURCES)
 OBJS				= 	$(MAIN_SOURCES:.c=.o)
 
-CFLAGS 				= 	-Wall -Wextra -Werror
+CFLAGS 				= 	-Wall -Wextra -Werror -pthread
 CC 					= 	gcc
 
 all: $(NAME)

@@ -6,23 +6,21 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:56:19 by manu              #+#    #+#             */
-/*   Updated: 2022/08/20 16:55:16 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/20 18:06:32 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "state.h"
+#include "philo_factory.h"
 
 int	main(int argc, char *argv[])
 {
 	t_state	state;
 
 	init_state(&state, argc, argv);
-	printf("state.n_philosophers = %d\n", state.n_philos);
-	printf("state.time_to_die = %d\n", state.time_to_die);
-	printf("state.time_to_eat = %d\n", state.time_to_eat);
-	printf("state.time_to_sleep = %d\n", state.time_to_sleep);
-	printf("state.ntimes_must_eat = %d\n", state.ntimes_must_eat);
+	pthread_mutex_lock(&state.creation_mutex);
+	create_all_philos(&state);
+	pthread_mutex_unlock(&state.creation_mutex);
 	free_state(&state);
 	return (0);
 }
