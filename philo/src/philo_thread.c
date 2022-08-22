@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/22 18:54:59 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/22 19:01:26 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ void	*philo_thread(void *param)
 		pthread_mutex_lock(me->fork_left);
 		printf("Has taken a fork (left) (philo_id = %d)\n", me->n_philo);
 		fflush(stdout);
-		pthread_mutex_lock(me->fork_right);
-		printf("Has taken a fork (right) (philo_id = %d)\n", me->n_philo);
-		fflush(stdout);
+		if (me->n_forks > 1)
+		{
+			pthread_mutex_lock(me->fork_right);
+			printf("Has taken a fork (right) (philo_id = %d)\n", me->n_philo);
+			fflush(stdout);
+		}
 		pthread_mutex_unlock(me->fork_taking_mutex);
 		usleep(3000000);
 		pthread_mutex_unlock(me->fork_left);
