@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/20 19:21:48 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/22 18:45:30 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "state.h"
 #include "error.h"
 #include "philo_thread.h"
+#include "philo_mutex.h"
 
 int	create_philo(t_state *state, int n_philo)
 {
@@ -23,6 +24,14 @@ int	create_philo(t_state *state, int n_philo)
 
 	philo = &state->philos[n_philo];
 	philo->n_philo = n_philo;
+	if (n_philo == 0)
+		philo->fork_left = &state->fork_mutex[state->n_philos - 1];
+	else
+		philo->fork_left = &state->fork_mutex[n_philo - 1];
+	philo->fork_right = &state->fork_mutex[n_philo];
+	philo->fork_taking_mutex = &state->fork_taking_mutex;
+	pthread_mutex_init(&philo->creation_mutex, NULL);
+	pthread_mutex_lock(&philo->creation_mutex);
 	if (pthread_create(&philo->thread, NULL, &philo_thread, philo) != 0)
 		return (exit_with_error("Error creating thread.\n", state));
 	return (1);
@@ -32,12 +41,14 @@ int	create_all_philos(t_state *state)
 {
 	int	n_philo;
 
+	pthread_mutex_init(&state->fork_taking_mutex, NULL);
 	n_philo = 0;
 	while (n_philo < state->n_philos)
 	{
 		create_philo(state, n_philo);
 		n_philo++;
 	}
+	unlock_all_philo_creation_mutex(state);
 	return (1);
 }
 
