@@ -6,6 +6,7 @@ INCLUDES_DIR		= 	includes
 
 SOURCES				= 	$(SRC_DIR)/error.c \
 						$(SRC_DIR)/ft_atoi.c \
+						$(SRC_DIR)/log.c \
 						$(SRC_DIR)/philo_factory.c \
 						$(SRC_DIR)/philo_mutex.c \
 						$(SRC_DIR)/philo_thread.c \
