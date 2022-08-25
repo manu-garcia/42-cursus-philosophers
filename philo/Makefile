@@ -10,7 +10,8 @@ SOURCES				= 	$(SRC_DIR)/error.c \
 						$(SRC_DIR)/philo_factory.c \
 						$(SRC_DIR)/philo_mutex.c \
 						$(SRC_DIR)/philo_thread.c \
-						$(SRC_DIR)/state.c
+						$(SRC_DIR)/state.c \
+						$(SRC_DIR)/atime.c
 MAIN_SOURCES		= 	$(SRC_DIR)/main.c $(SOURCES)
 OBJS				= 	$(MAIN_SOURCES:.c=.o)
 
@@ -41,4 +42,7 @@ norminette:
 valgrind:
 	valgrind --leak-check=full --track-origins=yes ./philo
 
-.PHONY: all clean fclean re valgrind
+test:
+	./philo 10 20 10 10 1
+
+.PHONY: all clean fclean re valgrind test

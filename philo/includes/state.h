@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:07:36 by manu              #+#    #+#             */
-/*   Updated: 2022/08/22 19:00:38 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/25 19:03:08 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ typedef struct s_philosopher {
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	*fork_taking_mutex;
+	long			start_time;
+	long			last_time_ate;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
 }	t_philo;
 
 typedef struct s_state {

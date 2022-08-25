@@ -6,13 +6,15 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:07:36 by manu              #+#    #+#             */
-/*   Updated: 2022/08/22 19:09:12 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/25 19:02:51 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LOG_H
 # define LOG_H
 
-void	log_msg(long milliseconds, int n_philo, char *message);
+# include "state.h"
+
+void	log_philo_msg(t_philo *philo, char *message);
 
 #endif

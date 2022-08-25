@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:22:30 by manu              #+#    #+#             */
-/*   Updated: 2022/08/22 18:52:43 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/25 18:39:54 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	init_state_parameters(t_state *state, int argc, char *argv[])
 	state->time_to_die = ft_atoi(argv[2]);
 	state->time_to_eat = ft_atoi(argv[3]);
 	state->time_to_sleep = ft_atoi(argv[4]);
-	state->ntimes_must_eat = ft_atoi(argv[5]);
+	if (argc == 6)
+		state->ntimes_must_eat = ft_atoi(argv[5]);
 	return (1);
 }
 
