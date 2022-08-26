@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/25 19:05:46 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/26 12:18:58 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,7 @@
 #include "state.h"
 #include "log.h"
 #include "atime.h"
-
-static int	check_if_dead(t_philo *philo)
-{
-	long	time;
-
-	time = (get_milliseconds_now() - philo->last_time_ate);
-	if (time > philo->time_to_die)
-	{
-		log_philo_msg(philo, "died");
-		// printf("Took %ld ms to eat...\n", time);
-		exit(0);
-		return (1);
-	}
-	return (0);
-}
+#include "philo_death.h"
 
 static int	philo_eat(t_philo *philo)
 {
@@ -48,7 +34,7 @@ static int	philo_eat(t_philo *philo)
 		return (0);
 	log_philo_msg(philo, "is eating");
 	// printf("Waiting %ld ms...\n", philo->time_to_eat);
-	custom_sleep(philo->time_to_eat);
+	custom_sleep(philo->time_to_eat, philo);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
 	philo->last_time_ate = get_milliseconds_now();
@@ -58,7 +44,7 @@ static int	philo_eat(t_philo *philo)
 static int	philo_sleep(t_philo *philo)
 {
 	log_philo_msg(philo, "is sleeping");
-	custom_sleep(philo->time_to_sleep);
+	custom_sleep(philo->time_to_sleep, philo);
 	return (1);
 }
 
@@ -73,6 +59,8 @@ void	*philo_thread(void *param)
 	t_philo	*me;
 
 	me = (t_philo *)param;
+	me->start_time = get_milliseconds_now();
+	me->last_time_ate = me->start_time;
 	pthread_mutex_lock(&me->creation_mutex);
 	me->start_time = get_milliseconds_now();
 	me->last_time_ate = me->start_time;

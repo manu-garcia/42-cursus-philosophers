@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:07:36 by manu              #+#    #+#             */
-/*   Updated: 2022/08/25 19:03:08 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/26 11:49:21 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_philosopher {
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
+	void			*state;
 }	t_philo;
 
 typedef struct s_state {
