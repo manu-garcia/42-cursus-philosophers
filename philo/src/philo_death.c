@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/26 12:21:13 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/29 20:19:25 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	check_if_dead(t_philo *philo)
 	time = (get_milliseconds_now() - philo->last_time_ate);
 	if (time > philo->time_to_die)
 	{
+		pthread_mutex_lock(&philo->death_mutex);
 		log_philo_msg(philo, "died");
 		// printf("Took %ld ms to eat...\n", time);
 		exit(0);
@@ -39,7 +40,7 @@ int	check_if_any_dead(t_state *state)
 	n_philo = 0;
 	while (n_philo < state->n_philos)
 	{
-		// check_if_dead(&state->philos[n_philo]);
+		check_if_dead(&state->philos[n_philo]);
 		n_philo++;
 	}
 	return (1);

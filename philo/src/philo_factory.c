@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/29 18:29:15 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/29 20:19:38 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	create_philo(t_state *state, int n_philo)
 	philo->fork_taking_mutex = &state->fork_taking_mutex;
 	pthread_mutex_init(&philo->creation_mutex, NULL);
 	pthread_mutex_lock(&philo->creation_mutex);
+	pthread_mutex_init(&philo->death_mutex, NULL);
 	if (pthread_create(&philo->thread, NULL, &philo_thread, philo) != 0)
 		return (exit_with_error("Error creating thread.\n", state));
 	return (1);

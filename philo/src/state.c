@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:22:30 by manu              #+#    #+#             */
-/*   Updated: 2022/08/29 18:29:36 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/29 20:27:00 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@ static int	init_state_parameters(t_state *state, int argc, char *argv[])
 	if (argc < 5 || argc > 6)
 		return (exit_with_error("Error. Invalid arguments\n", state));
 	state->n_philos = ft_atoi(argv[1]);
+	if (state->n_philos < 1)
+		return (exit_with_error("Invalid number of philosophers\n", state));
 	state->time_to_die = ft_atoi(argv[2]);
 	state->time_to_eat = ft_atoi(argv[3]);
 	state->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		state->ntimes_must_eat = ft_atoi(argv[5]);
+	if (state->time_to_die < 0 || state->time_to_eat < 0
+		|| state->time_to_sleep < 0 || state->ntimes_must_eat < 0)
+		return (exit_with_error("Invalid parameter\n", state));
 	return (1);
 }
 
@@ -55,7 +60,7 @@ int	free_state(t_state *state)
 	if (state->fork_mutex)
 	{
 		while (n_philo < state->n_philos)
-			pthread_mutex_destroy(&state->fork_mutex[n_philo++]);
+			pthread_mutex_destroy(&state->fork_mutex[n_philo++].mutex);
 		free(state->fork_mutex);
 	}
 	pthread_mutex_destroy(&state->fork_taking_mutex);
