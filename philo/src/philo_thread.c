@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/26 12:18:58 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/29 18:29:25 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 
 static int	philo_eat(t_philo *philo)
 {
+	if (philo->ntimes_must_eat > 0
+		&& philo->n_times_eaten >= philo->ntimes_must_eat)
+			return (0);
 	pthread_mutex_lock(philo->fork_taking_mutex);
 	pthread_mutex_lock(philo->fork_left);
 	log_philo_msg(philo, "has taken a fork");
-	if (philo->n_forks > 1)
-	{
-		pthread_mutex_lock(philo->fork_right);
-		log_philo_msg(philo, "has taken a fork");
-	}
+	pthread_mutex_lock(philo->fork_right);
+	log_philo_msg(philo, "has taken a fork");
 	pthread_mutex_unlock(philo->fork_taking_mutex);
 	// log_philo_msg(philo, "Fork taking mutex unlocked");
 	if (check_if_dead(philo))
@@ -38,6 +38,7 @@ static int	philo_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
 	philo->last_time_ate = get_milliseconds_now();
+	philo->n_times_eaten += 1;
 	return (1);
 }
 

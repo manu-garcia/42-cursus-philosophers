@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:22:30 by manu              #+#    #+#             */
-/*   Updated: 2022/08/25 18:39:54 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/29 18:29:36 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	init_state(t_state *state, int argc, char *argv[])
 	memset(state, 0, sizeof(t_state));
 	init_state_parameters(state, argc, argv);
 	state->philos = (t_philo *)malloc(state->n_philos * sizeof(t_philo));
+	memset(state->philos, 0, state->n_philos * sizeof(t_philo));
 	return (1);
 }
 

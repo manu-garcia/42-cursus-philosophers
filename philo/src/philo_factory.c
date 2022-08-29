@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/26 12:18:30 by manu             ###   ########.fr       */
+/*   Updated: 2022/08/29 18:29:15 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	create_philo(t_state *state, int n_philo)
 	philo->time_to_sleep = state->time_to_sleep;
 	philo->n_philo = n_philo;
 	philo->n_forks = state->n_philos;
+	philo->ntimes_must_eat = state->ntimes_must_eat;
 	if (n_philo == 0)
 		philo->fork_left = &state->fork_mutex[state->n_philos - 1];
 	else
