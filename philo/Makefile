@@ -12,6 +12,7 @@ SOURCES				= 	$(SRC_DIR)/error.c \
 						$(SRC_DIR)/philo_mutex.c \
 						$(SRC_DIR)/philo_thread.c \
 						$(SRC_DIR)/state.c \
+						$(SRC_DIR)/stats.c \
 						$(SRC_DIR)/atime.c
 MAIN_SOURCES		= 	$(SRC_DIR)/main.c $(SOURCES)
 OBJS				= 	$(MAIN_SOURCES:.c=.o)

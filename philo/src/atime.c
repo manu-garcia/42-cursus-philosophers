@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:23:41 by manu              #+#    #+#             */
-/*   Updated: 2022/09/02 11:22:53 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/03 01:27:54 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "philo_death.h"
 
 #define USLEEP_USEC	1
-// #define USLEEP_USEC	50
 
 long	get_milliseconds_now(void)
 {

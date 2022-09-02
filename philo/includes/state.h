@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:07:36 by manu              #+#    #+#             */
-/*   Updated: 2022/09/02 11:17:10 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/02 12:55:36 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_stats {
 	int				n_philos_not_eaten;
 	int				n_meals_eaten;
 	double			n_avg_meals_eaten;
+	int				n_max_meals_eaten;
+	int				n_min_meals_eaten;
 }	t_stats;
 
 typedef struct s_philosopher {
@@ -48,6 +50,7 @@ typedef struct s_philosopher {
 	int				has_started;
 	int				has_finished;
 	int				has_eaten_all;
+	int				greedy_penalty;
 }	t_philo;
 
 typedef struct s_state {

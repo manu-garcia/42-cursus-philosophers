@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/31 17:47:53 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/02 11:51:36 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	log_philo_msg(t_philo *philo, char *message)
 
 	if (!philo->is_dead)
 	{
+		pthread_mutex_lock(philo->death_mutex);
 		ms_from_begining = get_milliseconds_now() - philo->start_time;
 		printf("%ld %d %s\n", ms_from_begining, philo->n_philo + 1, message);
+		pthread_mutex_unlock(philo->death_mutex);
 	}
 }
 

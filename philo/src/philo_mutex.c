@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/08/29 20:01:58 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/02 13:53:24 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ void	take_fork(t_philo *philo, t_fork *fork)
 
 void	leave_fork(t_fork *fork)
 {
-	pthread_mutex_unlock(&fork->mutex);
 	fork->taken = 0;
+	pthread_mutex_unlock(&fork->mutex);
 }

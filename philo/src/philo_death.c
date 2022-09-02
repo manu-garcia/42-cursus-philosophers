@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/09/02 11:34:17 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/03 01:29:31 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h> // printf
 
 #include "state.h"
+#include "stats.h"
 #include "log.h"
 #include "atime.h"
 
@@ -27,11 +28,30 @@ int	check_if_dead(t_philo *philo)
 	if (time > philo->time_to_die)
 	{
 		log_philo_msg(philo, "\033[1;31m died \033[0m");
-		// pthread_mutex_lock(&philo->death_mutex);
+		pthread_mutex_lock(philo->death_mutex);
 		philo->is_dead = 1;
 		printf("Took %ld ms to eat...\n", time);
 		return (1);
 	}
+	return (0);
+}
+
+int	delay_greedy(t_state *state)
+{
+	int	n_philo;
+
+	calc_stats(state);
+	pthread_mutex_lock(&state->fork_taking_mutex);
+	n_philo = state->n_philos - 1;
+	while (n_philo)
+	{
+		if (state->philos[n_philo].n_times_eaten > state->stats.n_min_meals_eaten + 1)
+			state->philos[n_philo].greedy_penalty = 1;
+		else
+			state->philos[n_philo].greedy_penalty = 0;
+		n_philo--;
+	}
+	pthread_mutex_unlock(&state->fork_taking_mutex);
 	return (0);
 }
 
@@ -48,6 +68,7 @@ int	check_if_any_dead_or_finished(t_state *state)
 			return (1);
 		n_philo++;
 	}
+	// delay_greedy(state);
 	return (0);
 }
 
