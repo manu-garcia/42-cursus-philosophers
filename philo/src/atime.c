@@ -6,7 +6,7 @@
 /*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:23:41 by manu              #+#    #+#             */
-/*   Updated: 2022/08/26 12:17:40 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/02 11:22:53 by manu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 
 #include "state.h"
 #include "philo_death.h"
+
+#define USLEEP_USEC	1
+// #define USLEEP_USEC	50
 
 long	get_milliseconds_now(void)
 {
@@ -38,12 +41,14 @@ long	get_milliseconds_diff(struct timeval timer)
 
 void	custom_sleep(long milliseconds, t_philo *philo)
 {
-	long	start;
+	long	now;
+	int		multiplier;
 
-	start = get_milliseconds_now();
-	while (get_milliseconds_now() - start < milliseconds)
-	{
-		usleep(1);
-		check_if_any_dead(philo->state);
-	}
+	if (philo)
+		multiplier = philo->n_forks;
+	else
+		multiplier = 1;
+	now = get_milliseconds_now();
+	while (milliseconds > get_milliseconds_now() - now)
+		usleep(USLEEP_USEC * multiplier);
 }
