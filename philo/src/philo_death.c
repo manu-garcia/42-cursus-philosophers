@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_death.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: manugarc <manugarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/09/03 01:29:31 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/03 15:17:12 by manugarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	check_if_dead(t_philo *philo)
 {
 	long	time;
 
-	if (philo->ntimes_must_eat && philo->n_times_eaten >= philo->ntimes_must_eat)
+	if (philo->ntimes_must_eat
+		&& philo->n_times_eaten >= philo->ntimes_must_eat)
 		return (0);
 	time = (get_milliseconds_now() - philo->last_time_ate);
 	if (time > philo->time_to_die)
@@ -33,25 +34,6 @@ int	check_if_dead(t_philo *philo)
 		printf("Took %ld ms to eat...\n", time);
 		return (1);
 	}
-	return (0);
-}
-
-int	delay_greedy(t_state *state)
-{
-	int	n_philo;
-
-	calc_stats(state);
-	pthread_mutex_lock(&state->fork_taking_mutex);
-	n_philo = state->n_philos - 1;
-	while (n_philo)
-	{
-		if (state->philos[n_philo].n_times_eaten > state->stats.n_min_meals_eaten + 1)
-			state->philos[n_philo].greedy_penalty = 1;
-		else
-			state->philos[n_philo].greedy_penalty = 0;
-		n_philo--;
-	}
-	pthread_mutex_unlock(&state->fork_taking_mutex);
 	return (0);
 }
 
@@ -68,22 +50,7 @@ int	check_if_any_dead_or_finished(t_state *state)
 			return (1);
 		n_philo++;
 	}
-	// delay_greedy(state);
 	return (0);
-}
-
-int	check_if_all_ate(t_state *state)
-{
-	int	n_philo;
-
-	n_philo = 0;
-	while (n_philo < state->n_philos)
-	{
-		if (!state->philos[n_philo].has_eaten_all)
-			return (0);
-		n_philo++;
-	}
-	return (1);
 }
 
 int	check_if_all_started(t_state *state)

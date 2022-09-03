@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_death.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: manugarc <manugarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 11:55:33 by manu              #+#    #+#             */
-/*   Updated: 2022/09/01 16:50:07 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/03 15:17:18 by manugarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	check_if_dead(t_philo *philo);
 int	check_if_any_dead_or_finished(t_state *state);
 int	check_if_all_started(t_state *state);
 int	check_if_all_finished(t_state *state);
-int	check_if_all_ate(t_state *state);
 int	set_all_dead(t_state *state);
 
 #endif

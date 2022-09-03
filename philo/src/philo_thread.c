@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_thread.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: manugarc <manugarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/09/02 14:20:07 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/03 15:15:34 by manugarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 static int	philo_eat(t_philo *philo)
 {
-	if (philo->is_dead/* || check_if_dead(philo)*/)
+	if (philo->is_dead)
 		return (0);
 	philo->last_time_ate = get_milliseconds_now();
 	philo->n_times_eaten += 1;
@@ -39,9 +39,6 @@ static int	philo_take_forks(t_philo *philo)
 {
 	if (philo->is_dead)
 		return (0);
-	// if (philo->greedy_penalty)
-	// 	// return (0);
-	// 	custom_sleep(philo->n_forks, NULL);
 	pthread_mutex_lock(philo->fork_taking_mutex);
 	if (philo->n_forks > 1
 		&& !philo->fork_left->taken && !philo->fork_right->taken)
@@ -90,7 +87,8 @@ void	*philo_thread(void *param)
 				break ;
 			philo_sleep(philo);
 			philo_think(philo);
-			custom_sleep((philo->time_to_die - philo->time_to_eat - philo->time_to_sleep)/4, philo);
+			custom_sleep((philo->time_to_die - philo->time_to_eat
+					- philo->time_to_sleep) / 4, philo);
 		}
 	}
 	philo->has_finished = 1;

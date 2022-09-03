@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_factory.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: manugarc <manugarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/09/03 01:28:48 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/03 15:17:38 by manugarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	create_philo(t_state *state, int n_philo)
 	t_philo	*philo;
 
 	philo = &state->philos[n_philo];
-	// philo->state = state;
 	philo->time_to_die = state->time_to_die;
 	philo->time_to_eat = state->time_to_eat;
 	philo->time_to_sleep = state->time_to_sleep;
@@ -84,10 +83,6 @@ int	wait_for_all_philos(t_state *state)
 		custom_sleep(9, NULL);
 	if (state->ntimes_must_eat == 0)
 		set_all_dead(state);
-	// while (!check_if_all_finished(state))
-	// 	custom_sleep(1, NULL);
-	if (!check_if_all_ate(state))
-		log_msg(state, "Someone died");
 	log_msg(state, "Waiting for all to finish.");
 	log_msg(state, "Printing stats");
 	show_stats(state);
