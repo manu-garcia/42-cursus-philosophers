@@ -6,7 +6,7 @@
 /*   By: manugarc <manugarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/09/03 15:17:38 by manugarc         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:31:46 by manugarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,5 @@ int	wait_for_all_philos(t_state *state)
 		set_all_dead(state);
 	log_msg(state, "Waiting for all to finish.");
 	log_msg(state, "Printing stats");
-	show_stats(state);
 	return (1);
 }

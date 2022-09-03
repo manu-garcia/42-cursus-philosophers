@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   log.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manu <manu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: manugarc <manugarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/09/02 11:51:36 by manu             ###   ########.fr       */
+/*   Updated: 2022/09/03 15:28:03 by manugarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	log_msg(t_state *state, char *message)
 {
 	long	ms_from_begining;
 
+	return ;
 	ms_from_begining = get_milliseconds_now() - state->simulation_start_time;
 	printf("%ld Main: %s\n", ms_from_begining, message);
 }

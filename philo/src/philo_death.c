@@ -6,12 +6,12 @@
 /*   By: manugarc <manugarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/09/03 15:17:12 by manugarc         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:29:48 by manugarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h> // exit
-#include <stdio.h> // printf
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "state.h"
 #include "stats.h"
@@ -31,7 +31,6 @@ int	check_if_dead(t_philo *philo)
 		log_philo_msg(philo, "\033[1;31m died \033[0m");
 		pthread_mutex_lock(philo->death_mutex);
 		philo->is_dead = 1;
-		printf("Took %ld ms to eat...\n", time);
 		return (1);
 	}
 	return (0);

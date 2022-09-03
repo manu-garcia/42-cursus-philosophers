@@ -6,12 +6,12 @@
 /*   By: manugarc <manugarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:00:46 by manu              #+#    #+#             */
-/*   Updated: 2022/09/03 15:15:34 by manugarc         ###   ########.fr       */
+/*   Updated: 2022/09/03 15:29:57 by manugarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h> // exit
-#include <stdio.h> // printf
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "state.h"
 #include "log.h"
